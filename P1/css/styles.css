@@ -1,0 +1,59 @@
+/* Main Section */
+
+body {
+    font-family: "Lato", sans-serif;
+    color: #747704;
+    font-weight: 300;
+}
+
+
+/* Content Item Customizations*/
+
+img {
+    max-width: 100%;
+}
+
+.logo-super {
+    margin-top: 20px;
+}
+
+hr {
+    height: 3px;
+    background-color: #bcbbbb;
+}
+
+a {
+    text-decoration: none;
+    color: #747704;
+    padding: 1.5em;
+}
+
+
+
+/* Text Formatting */
+
+.heavy {
+    font-weight: bold;
+}
+
+.letter-spacing {
+    letter-spacing: 2px;
+}
+    
+.text-muted {
+    color: #bcbbbb;
+}
+
+.text-thin {
+    font-weight: 100;
+}
+
+.title-super {
+    font-size: 60px;
+}
+
+
+/* TODO: Possible change of modal-text font weight */
+.modal-text {
+    padding: 1.5em;
+}
