@@ -2,7 +2,7 @@
 var bio = {
     "name": "Mark Crowther",
     "role": "Front-end Test Architect",
-    "welcome": "Welcome to my Udacity pages, part of the Front-end Web Developer course. Here you'll find a list of the web programming skills I'm developing as part of the Udacity course. Totally Udacious!",
+    "welcome": "Welcome to my Udacity pages, part of the Front-end Web Developer course. Here you'll find a list of the web programming skills I'm developing as part of the Udacity course. A Totally Udacious Mindblow&trade;!",
     "contacts": {
         "mobile": "+44 (0)7725 838417",
         "email": "mark@cyreath.co.uk",
@@ -11,7 +11,7 @@ var bio = {
         "blog": "http://cyreath.blogspot.com/",
         "location": "London, UK"
         },
-    "skills": ["HTML5", "CSS3", "JavaScript", "JQuery", "JSON", "Testing", "Automation"],
+    "skills": ["HTML5", "CSS3", "JavaScript", "JQuery", "JSON", "Test Automation"],
     "biopic": "http://cyreath.co.uk/dev/udacity/images/mark-crowther.png"
 };
 
@@ -25,11 +25,12 @@ bio.display = function() {
             
 // The solution at the end of [JavaScript Basics > Flow Control > Quiz] seemed very repetative, so I went for this instead
             bio.skills.forEach(function(item) {
-                var formattedSkills = HTMLskills.replace("%data%",item);
+                var formattedSkills = HTMLskills.replace("%data%", item);
                 $("#skills").append(formattedSkills);
             });
+            console.log("Skills added to the resume");
         }; //end Else
-}; // end displaySkills function
+}; // end bio.display function
 
 
  // ###########################      EDUCATION          ##############################
@@ -59,9 +60,14 @@ var education = {
             "dates": "2015",
             "url": "https://www.udacity.com"
         }        
-    ],
-    "display": "place function here"    
+    ] 
 }
+
+// FUNCTION to add each of the EDUCATION items in the work object onto the page
+
+education.display = function() {
+    console.log("education.display not implemented");
+};
 
  // ###########################      WORK          ##############################
 
@@ -72,18 +78,44 @@ var work = {
             "title": "Principal Consultant",
             "location": "London, UK",
             "dates": "April 2013 to present",
-            "description": "On-site consulting in Test Management and Delivery"
+            "description": "In this current role I deliver on-site consulting in Test Management for finance and banking clients. This can involve analysis and planning to execution and reporting. I'm responsbile for coding automated unit and functional system tests using tools such as Selenium and NightWatch.js along with integrated dashbaords."
         },
         {
             "employer": "Pride Systems Ltd",
-            "title": "Test Architect",
+            "title": "Front-end Test Architect",
             "location": "Malaga, Spain",
             "dates": "May 2011 to March 2013",
-            "description": "Design and Deliver hands-on testing solutions"
+            "description": "In this role I was responsible for developing web based dashboards and reports to help display and visualise testing data. I was required to design and code HTML, CSS and JavaScript web solutions that could be used by the team and senior management alike."
         }
-    ],
-    "display": "place function here"
+    ]
 }
+
+// FUNCTION to add each of the WORK items in the work object onto the page
+
+work.display = function() {
+    for (eachJob in work.jobs) {
+        $("#workExperience").append(HTMLworkStart);
+    // 
+        var formattedWorkEmployer = HTMLworkEmployer.replace("%data%", work.jobs[eachJob].employer);
+        var formattedWorkTitle = HTMLworkTitle.replace("%data%", work.jobs[eachJob].title);
+        var concatEmployerAndTitle = formattedWorkEmployer + formattedWorkTitle;
+        $(".work-entry:last").append(concatEmployerAndTitle);
+
+        var formattedLocation = HTMLworkLocation.replace("%data%", work.jobs[eachJob].location);
+        $(".work-entry:last").append(formattedLocation);        
+        
+        var formattedDates = HTMLworkDates.replace("%data%", work.jobs[eachJob].dates);
+        $(".work-entry:last").append(formattedDates);
+
+        var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[eachJob].description);
+        $(".work-entry:last").append(formattedDescription);        
+        
+    }
+    console.log("Work added to the resume");
+};
+
+
+// #############################   PROJECTS    #####################################
 
 var projects = {
     "projects": [
@@ -99,9 +131,14 @@ var projects = {
             "description": "Analysis and design of test environments",
             "images": "http://www.barclaycard.co.uk/personal/images/barclaycard_logo.png"
         }
-    ],
-    "display": "place function here"
+    ]
 }
+
+// FUNCTION to add each of the work items in the work object onto the page
+
+projects.display = function() {
+    console.log("projects.display not implemented");
+};
 
 
 // TO DO: Convert all the Code for adding elements to the webpage into FUNCTIONS
@@ -112,6 +149,9 @@ var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
 
 var formattedName = HTMLheaderName.replace("%data%", bio.name);
     $("#header").prepend(formattedName);
+
+console.log("Name and Role added to the resume");
+
 
 // TOP CONTACTS
 // ############# TODO: Change this to a forEach loop #############
@@ -144,3 +184,6 @@ var formattedWelcome = HTMLwelcomeMsg.replace("%data%",bio.welcome);
 
 // Call the resumeBuilder Functions to build the resume content
 bio.display();
+work.display();
+projects.display();
+education.display();
