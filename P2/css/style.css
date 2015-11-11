@@ -141,6 +141,13 @@ a {
   padding: 10px;
 }
 
+/* Disclosure: The below added with a little guidance from https://discussions.udacity.com/users/luis_196820 */
+#skills {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+}
+
 .center-content {
   padding: 2.5% 5%;
 }
