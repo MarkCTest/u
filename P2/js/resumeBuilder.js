@@ -4,7 +4,7 @@ var bio = {
     "role": "Front-end Test Architect",
     "welcome": "Welcome to my Udacity pages, part of the Front-end Web Developer course. Here you'll find a list of the web programming skills I'm developing as part of the Udacity course. A Totally Udacious Mindblow&trade;!",
     "contacts": {
-        "mobile": "+44 (0)7725 838417",
+        "youtube": "http://www.youtube.com/user/Cyreath",
         "email": "mark@cyreath.co.uk",
         "github": "MarkCTest",
         "twitter": "@MarkCTest",
@@ -12,26 +12,58 @@ var bio = {
         "location": "London, UK"
         },
     "skills": ["HTML5", "CSS3", "JavaScript", "JQuery", "JSON", "Test Automation"],
-    "biopic": "http://cyreath.co.uk/dev/udacity/images/mark-crowther.png"
+    "biopic": "images/mark001.jpg"
 };
 
-// Function to add skills if there are any in the skills array within the bio object
+// FUNCTION to add each of the BIO items in the work object onto the page
+
 bio.display = function() {
     if (bio.skills === 0) {
             console.log("Nothing in Skills so skills header is hidden");
         } else {
-            var formattedSkillsStart = HTMLskillsStart;
-            $("#header").append(formattedSkillsStart);
+            var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
+                $("#header").prepend(formattedRole);
+
+            var formattedName = HTMLheaderName.replace("%data%", bio.name);
+                $("#header").prepend(formattedName);
+
+            console.log("Name and Role added to the resume");
+
+            var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
+                $("#topContacts").append(formattedEmail);
+
+            var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.github);
+                $("#topContacts").append(formattedGithub);
+
+            var formattedTwitter = HTMLtwitter.replace("%data%", bio.contacts.twitter);
+                $("#topContacts").append(formattedTwitter);
+
+            var formattedBlog = HTMLblog.replace("%data%", bio.contacts.blog);
+                $("#topContacts").append(formattedBlog);
             
-// The solution at the end of [JavaScript Basics > Flow Control > Quiz] seemed very repetative, so I went for this instead
+            var formattedYoutube = HTMLyoutube.replace("%data%", bio.contacts.youtube);
+                $("#topContacts").append(formattedYoutube);
+
+            var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
+                $("#topContacts").append(formattedLocation);
+
+            var formattedBioPic = HTMLbioPic.replace("%data%", bio.biopic);
+                $("#header").append(formattedBioPic);
+
+            var formattedWelcome = HTMLwelcomeMsg.replace("%data%",bio.welcome);
+                $("#header").append(formattedWelcome);
+            
+            var formattedSkillsStart = HTMLskillsStart;
+                $("#header").append(formattedSkillsStart);
+            
+            // The solution at the end of [JavaScript Basics > Flow Control > Quiz] seemed very repetative, so I went for this instead
             bio.skills.forEach(function(item) {
                 var formattedSkills = HTMLskills.replace("%data%", item);
                 $("#skills").append(formattedSkills);
             });
-            console.log("Skills added to the resume");
+            console.log("Bio added to the resume");
         }; //end Else
 }; // end bio.display function
-
 
  // ###########################      EDUCATION          ##############################
 var education = {
@@ -66,7 +98,32 @@ var education = {
 // FUNCTION to add each of the EDUCATION items in the work object onto the page
 
 education.display = function() {
-    console.log("education.display not implemented");
+    $("#education").append(HTMLschoolStart);
+    $("#education").append(HTMLonlineClasses);
+       
+    for (eachSchool in education.schools) {
+        var formattedSchoolName = HTMLschoolName.replace("%data%", education.schools[eachSchool].name);
+        $(".education-entry:last").append(formattedSchoolName);
+        
+        var formattedSchoolLocation = HTMLschoolLocation.replace("%data%", education.schools[eachSchool].location);
+        $(".education-entry:last").append(formattedSchoolLocation);
+
+        var formattedSchoolDegree = HTMLschoolDegree.replace("%data%", education.schools[eachSchool].degree);
+        $(".education-entry:last").append(formattedSchoolDegree);    
+
+        var formattedSchoolMajor = HTMLschoolMajor.replace("%data%", education.schools[eachSchool].major);
+        $(".education-entry:last").append(formattedSchoolMajor);       
+        
+        var formattedSchoolDates = HTMLschoolDates.replace("%data%", education.schools[eachSchool].dates);
+        $(".education-entry:last").append(formattedSchoolDates);        
+
+        var formattedSchoolURL = HTMLschoolName.replace("#", education.schools[eachSchool].url);
+        $(".education-entry:last").append(formattedSchoolURL);         
+        
+    }
+
+    
+    console.log("Schools added to the resume")
 };
 
  // ###########################      WORK          ##############################
@@ -95,7 +152,7 @@ var work = {
 work.display = function() {
     for (eachJob in work.jobs) {
         $("#workExperience").append(HTMLworkStart);
-    // 
+     
         var formattedWorkEmployer = HTMLworkEmployer.replace("%data%", work.jobs[eachJob].employer);
         var formattedWorkTitle = HTMLworkTitle.replace("%data%", work.jobs[eachJob].title);
         var concatEmployerAndTitle = formattedWorkEmployer + formattedWorkTitle;
@@ -109,27 +166,28 @@ work.display = function() {
 
         var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[eachJob].description);
         $(".work-entry:last").append(formattedDescription);        
+
+        console.log("Work items added to the resume");        
         
     }
-    console.log("Work added to the resume");
 };
 
 
 // #############################   PROJECTS    #####################################
 
 var projects = {
-    "projects": [
+    "theProjects": [
         {
             "title": "Automation Engineer",
             "dates": "2014",
-            "description": "Test Automation of over 300 applications for an investment bank",
-            "images": "http://logodatabases.com/wp-content/uploads/2012/03/deutsche-bank.jpg"
+            "description": "Test Automation of over 300 applications for an investment bank. This involved tool selection based on the unique needs of the application team's testing problem, design of HTML based reporting interface, PoC build and deployment via a third party automation vendor.",
+            "images": ["images/logo-db.png", "images/icon-nightwatch.png", "images/logo-sel.png", "images/icon-html5.png", "images/icon-css3.png"]
         },
         {
             "title": "Test Support Architect",
             "dates": "2015",
             "description": "Analysis and design of test environments",
-            "images": "http://www.barclaycard.co.uk/personal/images/barclaycard_logo.png"
+            "images": ["images/logo-bc.png", "images/logo-itil.png"]
         }
     ]
 }
@@ -137,50 +195,32 @@ var projects = {
 // FUNCTION to add each of the work items in the work object onto the page
 
 projects.display = function() {
-    console.log("projects.display not implemented");
+    for (eachProject in projects.theProjects) {
+        $("#projects").append(HTMLprojectStart);
+        
+        var formattedProjectTitle = HTMLprojectTitle.replace("%data%", projects.theProjects[eachProject].title);
+        $(".project-entry:last").append(formattedProjectTitle);
+        
+        var formattedProjectDates = HTMLprojectDates.replace("%data%", projects.theProjects[eachProject].dates);
+        $(".project-entry:last").append(formattedProjectDates);
+        
+        var formattedProjectDescription = HTMLprojectDescription.replace("%data%", projects.theProjects[eachProject].description);
+        $(".project-entry:last").append(formattedProjectDescription);
+
+            if (projects.theProjects[eachProject].images.length === 0) {
+                console.log("Nothing in Images so Images won't be shown");
+            } else {
+                for (eachImage in projects.theProjects[eachProject].images) {
+                     var formattedProjectImage = HTMLprojectImage.replace("%data%", projects.theProjects[eachProject].images[eachImage]);
+                    $(".project-entry:last").append(formattedProjectImage);
+                } // end FOR
+            } //end of ELSE
+        
+        console.log("Projects added to the resume");
+        
+    } // end of FOR
 };
 
-
-// TO DO: Convert all the Code for adding elements to the webpage into FUNCTIONS
-// #############################################################################
-
-var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
-    $("#header").prepend(formattedRole);
-
-var formattedName = HTMLheaderName.replace("%data%", bio.name);
-    $("#header").prepend(formattedName);
-
-console.log("Name and Role added to the resume");
-
-
-// TOP CONTACTS
-// ############# TODO: Change this to a forEach loop #############
-
-var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
-    $("#topContacts").append(formattedMobile);
-
-var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
-    $("#topContacts").append(formattedEmail);
-
-var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.github);
-    $("#topContacts").append(formattedGithub);
-
-var formattedTwitter = HTMLtwitter.replace("%data%", bio.contacts.twitter);
-    $("#topContacts").append(formattedTwitter);
-
-var formattedBlog = HTMLblog.replace("%data%", bio.contacts.blog);
-    $("#topContacts").append(formattedBlog);
-
-var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
-    $("#topContacts").append(formattedLocation);
-
-// Extra #Header Items
-
-var formattedBioPic = HTMLbioPic.replace("%data%", bio.biopic);
-    $("#header").append(formattedBioPic);
-
-var formattedWelcome = HTMLwelcomeMsg.replace("%data%",bio.welcome);
-    $("#header").append(formattedWelcome);
 
 // Call the resumeBuilder Functions to build the resume content
 bio.display();
