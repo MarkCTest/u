@@ -12,13 +12,9 @@ var bio = {
         "location": "London, UK"
         },
     "skills": ["HTML5", "CSS3", "JavaScript", "JQuery", "JSON", "Test Automation"],
-    "biopic": "images/mark001.jpg"
-};
-
-// FUNCTION to add each of the BIO items in the work object onto the page
-
-bio.display = function() {
-    if (bio.skills === 0) {
+    "biopic": "images/mark001.jpg",
+    display : function() {
+        if (bio.skills === 0) {
             console.log("Nothing in Skills so skills header is hidden");
         } else {
             var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
@@ -31,19 +27,23 @@ bio.display = function() {
 
             var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
                 $("#topContacts").append(formattedEmail);
-
+            
             var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.github);
                 $("#topContacts").append(formattedGithub);
-
+                $("#footerContacts").append(formattedGithub);
+            
             var formattedTwitter = HTMLtwitter.replace("%data%", bio.contacts.twitter);
                 $("#topContacts").append(formattedTwitter);
-
+                $("#footerContacts").append(formattedTwitter);
+            
             var formattedBlog = HTMLblog.replace("%data%", bio.contacts.blog);
                 $("#topContacts").append(formattedBlog);
+                 $("#footerContacts").append(formattedBlog);
             
             var formattedYoutube = HTMLyoutube.replace("%data%", bio.contacts.youtube);
                 $("#topContacts").append(formattedYoutube);
-
+                $("#footerContacts").append(formattedYoutube);
+            
             var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
                 $("#topContacts").append(formattedLocation);
 
@@ -63,16 +63,17 @@ bio.display = function() {
             });
             console.log("Bio added to the resume");
         }; //end Else
-}; // end bio.display function
+    } // end bio.display function      
+};
 
- // ###########################      EDUCATION          ##############################
+ // ###########################      EDUCATION          #############################
 var education = {
     "schools": [
         {
             "name": "The Open University",
             "location": "Milton Keynes",
             "degree": "Computing and Systems Practice",
-            "major": "Automation",
+            "major": "Test Automation",
             "dates": "2011",
             "url": "http://www.open.ac.uk/"
         }
@@ -85,49 +86,57 @@ var education = {
             "url": "http://elearn.tenable.com/course/info.php?id=55"
         },
         {
-            "name": "Udacity",
-            "location": "Mountain View",
-            "degree": "Front-end Web Developer",
-            "major": "Web Development",
+            "title": "Front-end Web Developer",
+            "school": "Udacity",
             "dates": "2015",
             "url": "https://www.udacity.com"
         }        
-    ] 
-}
-
-// FUNCTION to add each of the EDUCATION items in the work object onto the page
-
-education.display = function() {
+    ],
+    
+display : function() {
     $("#education").append(HTMLschoolStart);
-    $("#education").append(HTMLonlineClasses);
-       
+    
+    
     for (eachSchool in education.schools) {
         var formattedSchoolName = HTMLschoolName.replace("%data%", education.schools[eachSchool].name);
-        $(".education-entry:last").append(formattedSchoolName);
-        
+        var formattedSchoolDegree = HTMLschoolDegree.replace("%data%", education.schools[eachSchool].degree);
+        var formattedSchoolCombined = formattedSchoolName + formattedSchoolDegree;
+        $(".education-entry:last").append(formattedSchoolCombined);      
+
+        var formattedSchoolDates = HTMLschoolDates.replace("%data%", education.schools[eachSchool].dates);
+        $(".education-entry:last").append(formattedSchoolDates);
+
         var formattedSchoolLocation = HTMLschoolLocation.replace("%data%", education.schools[eachSchool].location);
         $(".education-entry:last").append(formattedSchoolLocation);
 
-        var formattedSchoolDegree = HTMLschoolDegree.replace("%data%", education.schools[eachSchool].degree);
-        $(".education-entry:last").append(formattedSchoolDegree);    
-
         var formattedSchoolMajor = HTMLschoolMajor.replace("%data%", education.schools[eachSchool].major);
-        $(".education-entry:last").append(formattedSchoolMajor);       
+        $(".education-entry:last").append(formattedSchoolMajor);
         
-        var formattedSchoolDates = HTMLschoolDates.replace("%data%", education.schools[eachSchool].dates);
-        $(".education-entry:last").append(formattedSchoolDates);        
+        var formattedSchoolURL = HTMLschoolName.replace("%data%", education.schools[eachSchool].url);
+        $(".education-entry:last").append(formattedSchoolURL);
+        }
 
-        var formattedSchoolURL = HTMLschoolName.replace("#", education.schools[eachSchool].url);
-        $(".education-entry:last").append(formattedSchoolURL);         
-        
-    }
-
+    $("#education").append(HTMLonlineClasses);
     
-    console.log("Schools added to the resume")
+    for (eachOnlineClass in education.onlineCourses) {
+        $(HTMLschoolStart).insertAfter($("h3"));
+        var formattedOnlineTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[eachOnlineClass].title);
+        var formattedOnlineSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[eachOnlineClass].school);
+        var formattedOnlineCombined = formattedOnlineTitle + formattedOnlineSchool;
+        $(".education-entry:last").append(formattedOnlineCombined);
+        
+        var formattedOnlineDate = HTMLonlineDates.replace("%data%", education.onlineCourses[eachOnlineClass].dates);
+        $(".education-entry:last").append(formattedOnlineDate);
+ 
+        var formattedOnlineURL = HTMLonlineURL.replace("%data%", education.onlineCourses[eachOnlineClass].url);
+        $(".education-entry:last").append(formattedOnlineURL);        
+        
+        }
+        console.log("Schools added to the resume")
+    }      
 };
 
- // ###########################      WORK          ##############################
-
+ // ###########################        WORK             #############################
 var work = {
     "jobs": [
         {
@@ -143,13 +152,8 @@ var work = {
             "location": "Malaga, Spain",
             "dates": "May 2011 to March 2013",
             "description": "In this role I was responsible for developing web based dashboards and reports to help display and visualise testing data. I was required to design and code HTML, CSS and JavaScript web solutions that could be used by the team and senior management alike."
-        }
-    ]
-}
-
-// FUNCTION to add each of the WORK items in the work object onto the page
-
-work.display = function() {
+        }],
+display : function() {
     for (eachJob in work.jobs) {
         $("#workExperience").append(HTMLworkStart);
      
@@ -169,12 +173,12 @@ work.display = function() {
 
         console.log("Work items added to the resume");        
         
-    }
+        }
+    }    
 };
 
 
-// #############################   PROJECTS    #####################################
-
+// ############################       PROJECTS          #############################
 var projects = {
     "theProjects": [
         {
@@ -188,13 +192,9 @@ var projects = {
             "dates": "2015",
             "description": "Analysis and design of test environments",
             "images": ["images/logo-bc.png", "images/logo-itil.png"]
-        }
-    ]
-}
-
-// FUNCTION to add each of the work items in the work object onto the page
-
-projects.display = function() {
+        }],
+    
+display : function() {
     for (eachProject in projects.theProjects) {
         $("#projects").append(HTMLprojectStart);
         
@@ -218,12 +218,14 @@ projects.display = function() {
         
         console.log("Projects added to the resume");
         
-    } // end of FOR
-};
-
+        } // end of FOR
+    }    
+}; // end of PROJECTS object
 
 // Call the resumeBuilder Functions to build the resume content
 bio.display();
 work.display();
 projects.display();
 education.display();
+
+$("#mapDiv").append(googleMap);
