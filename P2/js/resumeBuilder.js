@@ -86,7 +86,7 @@ var education = {
 
         console.log("Education length is " + education.schools.length);
         
-        for (eachSchool in education.schools) {
+        for (var eachSchool in education.schools) {
             var sIndex = education.schools[eachSchool];
             var formattedSchoolName = HTMLschoolName.replace("%data%", sIndex.name);
             var formattedSchoolDegree = HTMLschoolDegree.replace("%data%", sIndex.degree);
@@ -102,7 +102,7 @@ var education = {
 
         $("#education").append(HTMLonlineClasses);
 
-        for (eachOnlineClass in education.onlineCourses) {
+        for (var eachOnlineClass in education.onlineCourses) {
             $(HTMLschoolStart).insertAfter($("h3"));
             var ocIndex = education.onlineCourses[eachOnlineClass];
 
@@ -139,7 +139,7 @@ var work = {
             "web solutions that could be used by the team and senior management alike."
     }],
     display: function() {
-        for (eachJob in work.jobs) {
+        for (var eachJob in work.jobs) {
 
             $("#workExperience").append(HTMLworkStart);
             var wIndex = work.jobs[eachJob];
@@ -177,7 +177,7 @@ var projects = {
     }],
 
     display: function() {
-        for (eachProject in projects.theProjects) {
+        for (var eachProject in projects.theProjects) {
             $("#projects").append(HTMLprojectStart);
             var pIndex = projects.theProjects[eachProject];
 
@@ -190,7 +190,7 @@ var projects = {
             if (pIndex.images.length === 0) {
                 console.log("Nothing in Images so Images won't be shown");
             } else {
-                for (eachImage in projects.theProjects[eachProject].images) {
+                for (var eachImage in projects.theProjects[eachProject].images) {
                     var formattedProjectImage = HTMLprojectImage.replace("%data%", pIndex.images[eachImage]);
                     $(".project-entry:last").append(formattedProjectImage);
                 } // end FOR
