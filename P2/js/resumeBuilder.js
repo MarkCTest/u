@@ -80,84 +80,91 @@ var education = {
     }],
 
     display: function() {
-        $("#education").append(HTMLschoolStart);
 
-        var $eduLast = $(".education-entry:last");
+            if (education.schools.length > 0) {
+                for (var eachSchool in education.schools) {
+                    $("#education").append(HTMLschoolStart);
 
-        console.log("Education length is " + education.schools.length);
-        
-        for (var eachSchool in education.schools) {
-            var sIndex = education.schools[eachSchool];
-            var formattedSchoolName = HTMLschoolName.replace("%data%", sIndex.name);
-            var formattedSchoolDegree = HTMLschoolDegree.replace("%data%", sIndex.degree);
-            var formattedSchoolCombined = formattedSchoolName + formattedSchoolDegree;
+                    var sIndex = education.schools[eachSchool];
+                    var formattedSchoolName = HTMLschoolName.replace("%data%", sIndex.name);
+                    var formattedSchoolDegree = HTMLschoolDegree.replace("%data%", sIndex.degree);
+                    var formattedSchoolCombined = formattedSchoolName + formattedSchoolDegree;
 
-            var formattedSchoolDates = HTMLschoolDates.replace("%data%", sIndex.dates);
-            var formattedSchoolLocation = HTMLschoolLocation.replace("%data%", sIndex.location);
-            var formattedSchoolMajor = HTMLschoolMajor.replace("%data%", sIndex.major);
-            var formattedSchoolURL = HTMLschoolName.replace("%data%", sIndex.url);
+                    var formattedSchoolDates = HTMLschoolDates.replace("%data%", sIndex.dates);
+                    var formattedSchoolLocation = HTMLschoolLocation.replace("%data%", sIndex.location);
+                    var formattedSchoolMajor = HTMLschoolMajor.replace("%data%", sIndex.major);
+                    var formattedSchoolURL = HTMLschoolName.replace("%data%", sIndex.url);
 
-            $eduLast.append(formattedSchoolCombined, formattedSchoolDates, formattedSchoolLocation, formattedSchoolMajor, formattedSchoolURL);
-        }
+                    $(".education-entry:last").append(formattedSchoolCombined, formattedSchoolDates, formattedSchoolLocation, formattedSchoolMajor, formattedSchoolURL);
+                    console.log("Schools added to the resume");
+                }
+            } else {
+                console.log("Schools is empty so nothing will be shown");
+            }
 
-        $("#education").append(HTMLonlineClasses);
+            if (education.onlineCourses.length > 0) {
+                $("#education").append(HTMLonlineClasses);
+                for (var eachCourse in education.onlineCourses) {
+                    $("#education").append(HTMLschoolStart);
+                    var ocIndex = education.onlineCourses[eachCourse];
 
-        for (var eachOnlineClass in education.onlineCourses) {
-            $(HTMLschoolStart).insertAfter($("h3"));
-            var ocIndex = education.onlineCourses[eachOnlineClass];
+                    var formattedOnlineTitle = HTMLonlineTitle.replace("%data%", ocIndex.title);
+                    var formattedOnlineSchool = HTMLonlineSchool.replace("%data%", ocIndex.school);
+                    var formattedOnlineCombined = formattedOnlineTitle + formattedOnlineSchool;
+                    var formattedOnlineDates = HTMLonlineDates.replace("%data%", ocIndex.dates);
+                    var formattedOnlineURL = HTMLonlineURL.replace("%data%", ocIndex.url);
 
-            var formattedOnlineTitle = HTMLonlineTitle.replace("%data%", ocIndex.title);
-            var formattedOnlineSchool = HTMLonlineSchool.replace("%data%", ocIndex.school);
-            var formattedOnlineCombined = formattedOnlineTitle + formattedOnlineSchool;
-            var formattedOnlineDate = HTMLonlineDates.replace("%data%", ocIndex.dates);
-            var formattedOnlineURL = HTMLonlineURL.replace("%data%", ocIndex.url);
+                    $(".education-entry:last").append(formattedOnlineCombined, formattedOnlineDates, formattedOnlineURL);
+                    console.log("Online Classes added to the resume");
+                }
+            } else {
+                console.log("Online Classes is empty so nothing will be shown");
+            }
 
-            $eduLast.append(formattedOnlineCombined, formattedOnlineDate, formattedOnlineURL);
-
-        }
-        console.log("Schools added to the resume");
-    }
+        } //end display function
 };
 
 // ###########################        WORK             #############################
 var work = {
-    "jobs": [{
-        "employer": "Piccadilly Group",
-        "title": "Principal Consultant",
-        "location": "London, UK",
-        "dates": "April 2013 to present",
-        "description": "In this current role I deliver on-site consulting in Test Management for finance and banking clients." +
-            "This can involve analysis and planning to execution and reporting. I'm responsbile for coding automated unit and" +
-            "functional system tests using tools such as Selenium and NightWatch.js along with integrated dashboards."
-    }, {
-        "employer": "Pride Systems Ltd",
-        "title": "Front-end Test Architect",
-        "location": "Malaga, Spain",
-        "dates": "May 2011 to March 2013",
-        "description": "In this role I was responsible for developing web based dashboards and reports " +
-            "to help display and visualise testing data. I was required to design and code HTML, CSS and JavaScript " +
-            "web solutions that could be used by the team and senior management alike."
-    }],
-    display: function() {
-        for (var eachJob in work.jobs) {
+        "jobs": [{
+            "employer": "Piccadilly Group",
+            "title": "Principal Consultant",
+            "location": "London, UK",
+            "dates": "April 2013 to present",
+            "description": "In this current role I deliver on-site consulting in Test Management for finance and banking clients." +
+                "This can involve analysis and planning to execution and reporting. I'm responsbile for coding automated unit and" +
+                "functional system tests using tools such as Selenium and NightWatch.js along with integrated dashboards."
+        }, {
+            "employer": "Pride Systems Ltd",
+            "title": "Front-end Test Architect",
+            "location": "Malaga, Spain",
+            "dates": "May 2011 to March 2013",
+            "description": "In this role I was responsible for developing web based dashboards and reports " +
+                "to help display and visualise testing data. I was required to design and code HTML, CSS and JavaScript " +
+                "web solutions that could be used by the team and senior management alike."
+        }],
+        display: function() {
 
-            $("#workExperience").append(HTMLworkStart);
-            var wIndex = work.jobs[eachJob];
+            if (work.jobs.length > 0) {
+                $("#workExperience").append(HTMLworkStart);
+                for (var eachJob in work.jobs) {
+                    var wIndex = work.jobs[eachJob];
 
-            var formattedWorkEmployer = HTMLworkEmployer.replace("%data%", wIndex.employer);
-            var formattedWorkTitle = HTMLworkTitle.replace("%data%", wIndex.title);
-            var concatEmployerAndTitle = formattedWorkEmployer + formattedWorkTitle;
-            var formattedLocation = HTMLworkLocation.replace("%data%", wIndex.location);
-            var formattedDates = HTMLworkDates.replace("%data%", wIndex.dates);
-            var formattedDescription = HTMLworkDescription.replace("%data%", wIndex.description);
+                    var formattedWorkEmployer = HTMLworkEmployer.replace("%data%", wIndex.employer);
+                    var formattedWorkTitle = HTMLworkTitle.replace("%data%", wIndex.title);
+                    var concatEmployerAndTitle = formattedWorkEmployer + formattedWorkTitle;
+                    var formattedLocation = HTMLworkLocation.replace("%data%", wIndex.location);
+                    var formattedDates = HTMLworkDates.replace("%data%", wIndex.dates);
+                    var formattedDescription = HTMLworkDescription.replace("%data%", wIndex.description);
 
-            $(".work-entry:last").append(concatEmployerAndTitle, formattedLocation, formattedDates, formattedDescription);
-
-            console.log("Work items added to the resume");
-
+                    $(".work-entry:last").append(concatEmployerAndTitle, formattedLocation, formattedDates, formattedDescription);
+                    console.log("Work items added to the resume");
+                }
+            } else {
+                console.log("Work is empty so nothing has been added to the resume");
+            }
         }
-    }
-};
+    }; // end WORK object
 
 
 // ############################       PROJECTS          #############################
